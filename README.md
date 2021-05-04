@@ -28,7 +28,25 @@ Number of Orders
 
 ### What is the last name of the employee with the most orders?
 
+SELECT EmployeeID, COUNT(DISTINCT OrderID)
+FROM Orders
+GROUP BY EmployeeID
+ORDER BY COUNT(DISTINCT OrderID) desc;
+
+Peacock is the last name of the employee with the most orders.
 
 
 ### What product was ordered the most by customers in Germany?
+SELECT 
+	Customers.CustomerID, 
+    Customers.Country,
+    OrderDetails.ProductID
+FROM Customers
+JOIN Orders
+	ON Customers.CustomerID = Orders.CustomerID
+JOIN OrderDetails
+	ON OrderDetails.OrderID = Orders.OrderID
+WHERE Country = 'Germany'
+ORDER BY ProductID;
 
+The product ordred the most by customers in Germany is productID 31, Gorgonzola Telino
